@@ -21,6 +21,6 @@ COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-RUN systemctl start nginx
+RUN chmod +x ./XAgentServer/sh/start.sh
 # HEALTHCHECK --interval=5s --timeout=10s --retries=3 CMD ["bash", "-c", "curl -sS 'http://localhost:8090/' > /dev/null || exit 1"]
-ENTRYPOINT [ "python", "start_server.py" ]
+ENTRYPOINT [ "sh", "./XAgentServer/sh/start.sh" ]
